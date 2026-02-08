@@ -9,5 +9,4 @@ public class EndtermProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(EndtermProjectApplication.class, args);
     }
-
 }
