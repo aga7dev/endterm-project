@@ -41,13 +41,11 @@ public class BookingService {
 
         Hotel hotel = hotelService.getHotelEntity(req.getHotelId());
 
-        // Factory creates correct subclass but returns base type
         Booking booking = BookingFactory.createBooking(req);
 
-        // Price calc (простая логика)
         double price = PriceCalculator.calculate(req.getCheckIn(), req.getCheckOut(), req.getRooms(), 50.0);
 
-        // Builder builds complex object (fluent + optional)
+
         booking = new BookingBuilder(booking)
                 .status(BookingStatus.NEW)
                 .hotel(hotel)
@@ -70,7 +68,7 @@ public class BookingService {
         Booking existing = repo.findById(id).orElseThrow(() -> new NotFoundException("Booking not found: " + id));
         Hotel hotel = hotelService.getHotelEntity(req.getHotelId());
 
-        // Если пытаются поменять тип — проще запретить (студенческая версия)
+
         if (req.getType() != null && req.getType() != existing.getType()) {
             throw new BadRequestException("Cannot change booking type after creation");
         }
@@ -86,7 +84,7 @@ public class BookingService {
         double price = PriceCalculator.calculate(req.getCheckIn(), req.getCheckOut(), req.getRooms(), 50.0);
         existing.setTotalPrice(price);
 
-        // subtype fields update
+
         if (existing instanceof HotelBooking hb && req.getBreakfastIncluded() != null) {
             hb.setBreakfastIncluded(req.getBreakfastIncluded());
         }

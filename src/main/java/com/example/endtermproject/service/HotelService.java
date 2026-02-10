@@ -52,7 +52,7 @@ public class HotelService {
         repo.deleteById(id);
     }
 
-    // internal helper
+
     public Hotel getHotelEntity(Long id) {
         return repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Hotel not found: " + id));
