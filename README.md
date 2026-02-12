@@ -197,6 +197,15 @@ PostgreSQL Database
 ```
 
 ---
+### CACHE
+In this project I implemented a simple in-memory cache.
+I created a cache package with a Cache interface and an InMemoryCache class.
+The cache uses ConcurrentHashMap and follows the Singleton pattern, so only one instance exists.
+Before getting a hotel from the database, the service checks the cache first.
+If the hotel exists in the cache, it returns the cached value.
+If not, it loads data from the database and stores it in the cache.
+When a hotel is updated or deleted, the cache entry is removed to keep data consistent.
+This improves performance by reducing unnecessary database calls.
 
 ## H. How to Run the Application
 
